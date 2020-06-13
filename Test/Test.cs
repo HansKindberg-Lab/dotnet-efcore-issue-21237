@@ -100,7 +100,7 @@ namespace Test
 			Assert.IsFalse(File.Exists(databaseFilePath));
 
 			var services = new ServiceCollection();
-			services.AddDbContext<DatabaseContext>(builder => builder.UseSqlServer("Server=(LocalDB)\\MSSQLLocalDB;AttachDbFileName=|DataDirectory|LocalDB-3.mdf;Integrated Security=True"));
+			services.AddDbContext<DatabaseContext>(builder => builder.UseSqlServer($"Server=(LocalDB)\\MSSQLLocalDB;AttachDbFileName=|DataDirectory|LocalDB-3.mdf;Database={databaseFilePath};Integrated Security=True"));
 			using(var scope = services.BuildServiceProvider().CreateScope())
 			{
 				var databaseContext = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
@@ -117,7 +117,7 @@ namespace Test
 			Assert.IsFalse(File.Exists(databaseFilePath));
 
 			var services = new ServiceCollection();
-			services.AddDbContext<DatabaseContext>(builder => builder.UseSqlServer($"Server=(LocalDB)\\MSSQLLocalDB;AttachDbFileName={_dataDirectoryPath}\\LocalDB-4.mdf;Integrated Security=True"));
+			services.AddDbContext<DatabaseContext>(builder => builder.UseSqlServer($"Server=(LocalDB)\\MSSQLLocalDB;AttachDbFileName={_dataDirectoryPath}\\LocalDB-4.mdf;Initial Catalog={databaseFilePath};Integrated Security=True"));
 			using(var scope = services.BuildServiceProvider().CreateScope())
 			{
 				var databaseContext = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
@@ -134,7 +134,7 @@ namespace Test
 			Assert.IsFalse(File.Exists(databaseFilePath));
 
 			var services = new ServiceCollection();
-			services.AddDbContext<DatabaseContext>(builder => builder.UseSqlServer("Server=(LocalDB)\\MSSQLLocalDB;AttachDbFileName=|DataDirectory|LocalDB-1.mdf;Integrated Security=True"));
+			services.AddDbContext<DatabaseContext>(builder => builder.UseSqlServer($"Server=(LocalDB)\\MSSQLLocalDB;AttachDbFileName=|DataDirectory|LocalDB-1.mdf;Database={databaseFilePath};Integrated Security=True"));
 			using(var scope = services.BuildServiceProvider().CreateScope())
 			{
 				var databaseContext = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
@@ -151,7 +151,7 @@ namespace Test
 			Assert.IsFalse(File.Exists(databaseFilePath));
 
 			var services = new ServiceCollection();
-			services.AddDbContext<DatabaseContext>(builder => builder.UseSqlServer($"Server=(LocalDB)\\MSSQLLocalDB;AttachDbFileName={_dataDirectoryPath}\\LocalDB-2.mdf;Integrated Security=True"));
+			services.AddDbContext<DatabaseContext>(builder => builder.UseSqlServer($"Server=(LocalDB)\\MSSQLLocalDB;AttachDbFileName={_dataDirectoryPath}\\LocalDB-2.mdf;Initial Catalog={databaseFilePath};Integrated Security=True"));
 			using(var scope = services.BuildServiceProvider().CreateScope())
 			{
 				var databaseContext = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
